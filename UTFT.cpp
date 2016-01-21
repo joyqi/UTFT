@@ -324,8 +324,16 @@ void UTFT::setXY(word x1, word y1, word x2, word y2)
 		swap(word, x2, y2)
 		y1=disp_y_size-y1;
 		y2=disp_y_size-y2;
-		swap(word, y1, y2)
+		swap(word, y1, y2);
 	}
+    else if (orient==ROTATE)
+    {
+        swap(word, y1, x1);
+		swap(word, y2, x2)
+		x1=disp_x_size-x1;
+		x2=disp_x_size-x2;
+		swap(word, x1, x2);
+    }
 
 	switch(display_model)
 	{
@@ -867,6 +875,31 @@ void UTFT::printChar(byte c, int x, int y)
 					}   
 				}
 				temp++;
+			}
+		}
+        else if (orient==ROTATE)
+		{
+			temp=((c-cfont.offset)*((cfont.x_size/8)*cfont.y_size))+4;
+
+			for(j=0;j<((cfont.x_size/8)*cfont.y_size);j+=(cfont.x_size/8))
+			{
+				setXY(x,y+(j/(cfont.x_size/8)),x+cfont.x_size-1,y+(j/(cfont.x_size/8)));
+				for (int zz=0; zz<cfont.x_size/8; zz++)
+				{
+					ch=pgm_read_byte(&cfont.font[temp+zz]);
+					for(i=0;i<8;i++)
+					{   
+						if((ch&(256>>i))!=0)   
+						{
+							setPixel((fch<<8)|fcl);
+						} 
+						else
+						{
+							setPixel((bch<<8)|bcl);
+						}   
+					}
+				}
+				temp+=(cfont.x_size/8);
 			}
 		}
 		else
