@@ -48,7 +48,7 @@
 
 #define PORTRAIT 0
 #define LANDSCAPE 1
-#define ROTATE 2
+#define LANDSCAPE_ROTATE 2
 
 #define HX8347A			0
 #define ILI9327			1

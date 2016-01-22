@@ -326,7 +326,7 @@ void UTFT::setXY(word x1, word y1, word x2, word y2)
 		y2=disp_y_size-y2;
 		swap(word, y1, y2);
 	}
-    else if (orient==ROTATE)
+    else if (orient==LANDSCAPE_ROTATE)
     {
         swap(word, y1, x1);
 		swap(word, y2, x2)
@@ -877,7 +877,7 @@ void UTFT::printChar(byte c, int x, int y)
 				temp++;
 			}
 		}
-        else if (orient==ROTATE)
+        else if (orient==LANDSCAPE_ROTATE)
 		{
 			temp=((c-cfont.offset)*((cfont.x_size/8)*cfont.y_size))+4;
 
