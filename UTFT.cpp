@@ -889,7 +889,7 @@ void UTFT::printChar(byte c, int x, int y)
 					ch=pgm_read_byte(&cfont.font[temp+zz]);
 					for(i=0;i<8;i++)
 					{   
-						if((ch&(256>>i))!=0)   
+						if((ch&(128>>i))!=0)   
 						{
 							setPixel((fch<<8)|fcl);
 						} 
